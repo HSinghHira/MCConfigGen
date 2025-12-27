@@ -1,0 +1,144 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+  closeText?: string;
+}
+
+const { id, title, closeText = 'Close' } = Astro.props;
+---
+
+<dialog id={id} class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>{title}</h3>
+      <button 
+        type="button" 
+        class="close-btn" 
+        onclick={`document.getElementById('${id}').close()`}
+        aria-label={closeText}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <slot />
+    </div>
+
+    <div class="modal-footer">
+      <slot name="footer">
+        <button 
+          type="button" 
+          class="btn-footer"
+          onclick={`document.getElementById('${id}').close()`}
+        >
+          {closeText}
+        </button>
+      </slot>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 100%;
+    max-width: 32rem;
+    color: var(--color-text);
+  }
+
+  .modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal[open] {
+    animation: zoom-in 0.2s ease-out;
+  }
+
+  .modal-content {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) var(--spacing-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .modal-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover {
+    color: var(--color-text);
+  }
+
+  .modal-body {
+    padding: var(--spacing-6);
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    padding: var(--spacing-4) var(--spacing-6);
+    border-top: 1px solid var(--color-border);
+    background-color: rgba(30, 41, 59, 0.5); /* slightly differently shaded surface */
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-3);
+  }
+
+  .btn-footer {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-footer:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>

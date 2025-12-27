@@ -1,0 +1,95 @@
+---
+import { MinusIcon, PlusIcon } from 'lucide-react'
+import { 
+  Button, 
+  Group, 
+  Input, 
+  Label, 
+  NumberField as ReactAriaNumberField,
+  Text 
+} from 'react-aria-components'
+
+interface Props {
+  label?: string;
+  name: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  placeholder?: string;
+  value?: number;
+  required?: boolean;
+  error?: string;
+  helperText?: string;
+  disabled?: boolean;
+  className?: string;
+}
+
+const { 
+  label, 
+  name, 
+  min,
+  max,
+  step,
+  placeholder, 
+  value, 
+  required = false, 
+  error, 
+  helperText,
+  disabled = false,
+  className = '' 
+} = Astro.props;
+---
+
+<ReactAriaNumberField 
+  client:load
+  name={name}
+  minValue={min}
+  maxValue={max}
+  step={step}
+  defaultValue={value}
+  isRequired={required}
+  isDisabled={disabled}
+  isInvalid={!!error}
+  className={`w-full max-w-xs space-y-2 ${className}`}
+>
+  {label && (
+    <Label className="flex items-center gap-1 text-sm leading-none font-medium select-none text-(--color-text-muted)">
+      {label} {required && <span class="text-(--color-danger)">*</span>}
+    </Label>
+  )}
+
+  <Group className="inline-flex relative items-center bg-transparent dark:bg-input/30 data-disabled:opacity-50 shadow-xs border border-input data-focus-within:border-ring data-focus-within:has-aria-invalid:border-destructive rounded-md outline-none data-focus-within:has-aria-invalid:ring-destructive/20 data-focus-within:ring-[3px] data-focus-within:ring-ring/50 dark:data-focus-within:has-aria-invalid:ring-destructive/40 w-full min-w-0 h-9 overflow-hidden md:text-sm text-base whitespace-nowrap transition-[color,box-shadow] data-disabled:cursor-not-allowed data-disabled:pointer-events-none">
+    <Input 
+      placeholder={placeholder}
+      className="bg-transparent selection:bg-primary px-3 py-2 outline-none w-full tabular-nums selection:text-primary-foreground text-center grow" 
+    />
+    
+    <Button
+      slot="decrement"
+      className="flex justify-center items-center bg-background hover:bg-accent disabled:opacity-50 -me-px border border-input h-[inherit] aspect-square text-muted-foreground hover:text-foreground text-sm transition-[color,box-shadow] disabled:cursor-not-allowed disabled:pointer-events-none"
+    >
+      <MinusIcon size={16} />
+      <span class="sr-only">Decrement</span>
+    </Button>
+    
+    <Button
+      slot="increment"
+      className="flex justify-center items-center bg-background hover:bg-accent disabled:opacity-50 -me-px border border-input rounded-r-md h-[inherit] aspect-square text-muted-foreground hover:text-foreground text-sm transition-[color,box-shadow] disabled:cursor-not-allowed disabled:pointer-events-none"
+    >
+      <PlusIcon size={16} />
+      <span class="sr-only">Increment</span>
+    </Button>
+  </Group>
+
+  {error && (
+    <Text slot="errorMessage" className="text-sm text-(--color-danger)">
+      {error}
+    </Text>
+  )}
+  
+  {helperText && !error && (
+    <Text slot="description" className="text-muted-foreground text-xs">
+      {helperText}
+    </Text>
+  )}
+</ReactAriaNumberField>

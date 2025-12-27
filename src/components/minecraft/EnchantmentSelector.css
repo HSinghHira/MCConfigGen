@@ -1,0 +1,323 @@
+.enchantment-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: var(--color-text, #f8fafc);
+    font-size: 0.875rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.active-enchantments {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--color-surface, #1e293b);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.5rem;
+    min-height: 60px;
+}
+
+.enchantment-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.enchantment-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.enchantment-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.enchantment-name {
+    color: var(--color-text, #f8fafc);
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.enchantment-description {
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.curse-badge,
+.treasure-badge {
+    display: inline-block;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.curse-badge {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+.treasure-badge {
+    background-color: rgba(250, 204, 21, 0.2);
+    color: #fde047;
+}
+
+.curse-badge-small,
+.treasure-badge-small {
+    display: inline-block;
+    padding: 0.0625rem 0.25rem;
+    border-radius: 0.1875rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-left: 0.25rem;
+}
+
+.curse-badge-small {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+.treasure-badge-small {
+    background-color: rgba(250, 204, 21, 0.2);
+    color: #fde047;
+}
+
+.level-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.level-input {
+    width: 60px;
+    padding: 0.375rem 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.25rem;
+    color: var(--color-text, #f8fafc);
+    text-align: center;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.level-input:focus {
+    outline: none;
+    border-color: var(--color-primary, #3b82f6);
+}
+
+.max-level-hint {
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.75rem;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--color-danger, #ef4444);
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0 0.375rem;
+    transition: color 0.2s;
+}
+
+.remove-btn:hover {
+    color: var(--color-danger-hover, #dc2626);
+}
+
+.no-enchantments {
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+}
+
+.add-enchantment {
+    position: relative;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 0.625rem;
+    background-color: transparent;
+    border: 1px dashed var(--color-border, #334155);
+    border-radius: 0.5rem;
+    color: var(--color-primary, #3b82f6);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.add-btn:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.05);
+    border-color: var(--color-primary, #3b82f6);
+}
+
+.add-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.dropdown-container {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface, #1e293b);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    padding: 0.75rem;
+    z-index: 50;
+    min-width: 300px;
+}
+
+.search-box {
+    margin-bottom: 0.75rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.375rem;
+    color: var(--color-text, #f8fafc);
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary, #3b82f6);
+}
+
+.search-input::placeholder {
+    color: var(--color-text-muted, #64748b);
+}
+
+.enchantments-list {
+    max-height: 210px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.enchantment-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.625rem 0.75rem;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.enchantment-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-border, #334155);
+}
+
+.option-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.option-name {
+    color: var(--color-text, #f8fafc);
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.option-description {
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+.option-max {
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.no-results {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.875rem;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+/* Scrollbar styling */
+.enchantments-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.enchantments-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.enchantments-list::-webkit-scrollbar-thumb {
+    background: var(--color-border, #334155);
+    border-radius: 4px;
+}
+
+.enchantments-list::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted, #475569);
+}

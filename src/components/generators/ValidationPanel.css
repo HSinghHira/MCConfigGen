@@ -1,0 +1,46 @@
+.validation-panel {
+    background-color: rgba(234, 179, 8, 0.1);
+    /* yellow-500/10 */
+    border: 1px solid rgba(234, 179, 8, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.validation-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--color-warning, #f59e0b);
+    margin-bottom: 0.5rem;
+}
+
+.error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.error-item {
+    font-size: 0.875rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.error-item.error {
+    color: var(--color-danger, #ef4444);
+}
+
+.error-item.warning {
+    color: var(--color-warning, #f59e0b);
+}
+
+.error-path {
+    font-family: monospace;
+    font-weight: 500;
+    opacity: 0.8;
+}

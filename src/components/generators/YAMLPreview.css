@@ -1,0 +1,69 @@
+.yaml-preview {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.5rem;
+    background-color: var(--color-bg, #0f172a);
+    height: 100%;
+    min-height: 400px;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border, #334155);
+    background-color: var(--color-surface, #1e293b);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.preview-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-text, #f8fafc);
+    font-weight: 600;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: transparent;
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text, #f8fafc);
+    border-color: var(--color-text-muted, #94a3b8);
+}
+
+.preview-content {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+    background-color: #0d1117;
+    /* GitHub dark code bg equivalent */
+}
+
+.preview-content pre {
+    margin: 0;
+    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #c9d1d9;
+    /* GitHub dark text */
+}

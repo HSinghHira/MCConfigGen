@@ -1,0 +1,24 @@
+{
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "[markdown]": {
+    "editor.fontSize": 14,
+    "editor.lineHeight": 26,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "editor.lineNumbers": "off",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.minimap.enabled": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.history": true,
+    "**/.vscode": true,
+    "**/.backup": true
+  }
+}

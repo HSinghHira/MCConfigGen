@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mc-config-gen.hira.im/sitemap-index.xml

@@ -1,0 +1,122 @@
+.actions-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.actions-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border, #334155);
+}
+
+.action-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-muted, #94a3b8);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.action-tab.active {
+    color: var(--color-primary, #3b82f6);
+    border-bottom-color: var(--color-primary, #3b82f6);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.actions-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-action-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-type-select {
+    width: 140px;
+}
+
+.type-select {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--color-surface, #1e293b);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.375rem;
+    color: var(--color-text, #f8fafc);
+}
+
+.action-input-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--color-surface, #1e293b);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.375rem;
+    color: var(--color-text, #f8fafc);
+}
+
+.add-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.actions-list {
+    background-color: var(--color-surface, #1e293b);
+    border: 1px solid var(--color-border, #334155);
+    border-radius: 0.375rem;
+    min-height: 150px;
+    padding: 0.5rem;
+}
+
+.empty-actions {
+    color: var(--color-text-muted, #94a3b8);
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.action-item:last-child {
+    border-bottom: none;
+}
+
+.action-text {
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: var(--color-text, #f8fafc);
+}
+
+.remove-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted, #94a3b8);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0 0.25rem;
+}
+
+.remove-action-btn:hover {
+    color: var(--color-danger, #ef4444);
+}

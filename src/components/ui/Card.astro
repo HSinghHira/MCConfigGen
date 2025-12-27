@@ -1,0 +1,49 @@
+---
+interface Props {
+  title?: string;
+  className?: string;
+}
+
+const { title, className = '' } = Astro.props;
+---
+
+<div class:list={['card', className]}>
+  {title && (
+    <div class="card-header">
+      <h3>{title}</h3>
+    </div>
+  )}
+  <div class="card-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-header {
+    padding: var(--spacing-4) var(--spacing-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .card-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .card-body {
+    padding: var(--spacing-6);
+  }
+</style>

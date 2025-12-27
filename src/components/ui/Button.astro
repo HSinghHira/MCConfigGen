@@ -1,0 +1,104 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
+  disabled?: boolean;
+}
+
+const { 
+  variant = 'primary', 
+  size = 'md', 
+  href, 
+  type = 'button',
+  className = '',
+  disabled = false
+} = Astro.props;
+
+const Element = href ? 'a' : 'button';
+const props = href ? { href } : { type, disabled };
+---
+
+<Element 
+  {...props} 
+  class:list={['btn', `btn-${variant}`, `btn-${size}`, className]}
+>
+  <slot />
+</Element>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    border: none;
+    text-decoration: none;
+    line-height: inherit;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Variants */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-border); /* Slightly lighter */
+  }
+
+  .btn-danger {
+    background-color: var(--color-danger);
+    color: white;
+  }
+  .btn-danger:hover:not(:disabled) {
+    background-color: var(--color-danger-hover);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-text-muted);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+
+  /* Sizes */
+  .btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-md {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+</style>

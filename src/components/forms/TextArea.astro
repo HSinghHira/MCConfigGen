@@ -1,0 +1,116 @@
+---
+interface Props {
+  label?: string;
+  name: string;
+  rows?: number;
+  placeholder?: string;
+  value?: string;
+  required?: boolean;
+  error?: string;
+  helperText?: string;
+  disabled?: boolean;
+  className?: string;
+}
+
+const { 
+  label, 
+  name, 
+  rows = 4, 
+  placeholder, 
+  value, 
+  required = false, 
+  error, 
+  helperText,
+  disabled = false,
+  className = '' 
+} = Astro.props;
+---
+
+<div class:list={['form-control', className]}>
+  {label && (
+    <label for={name} class="form-label">
+      {label} {required && <span class="required">*</span>}
+    </label>
+  )}
+  <textarea
+    id={name}
+    name={name}
+    rows={rows}
+    placeholder={placeholder}
+    disabled={disabled}
+    required={required}
+    class:list={[
+      "form-input",
+      error && "has-error",
+      disabled && "is-disabled"
+    ]}
+  >{value}</textarea>
+  {error && <p class="form-error">{error}</p>}
+  {helperText && !error && <p class="form-helper">{helperText}</p>}
+</div>
+
+<style>
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  .required {
+    color: var(--color-danger);
+  }
+
+  .form-input {
+    padding: 0.5rem 0.75rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    width: 100%;
+    transition: all 0.2s;
+    font-family: var(--font-family-mono);
+    resize: vertical;
+  }
+
+  .form-input::placeholder {
+    color: #64748b;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+
+  .form-input.has-error {
+    border-color: var(--color-danger);
+  }
+  
+  .form-input.has-error:focus {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+
+  .form-input.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .form-error {
+    font-size: 0.875rem;
+    color: var(--color-danger);
+    margin: 0;
+  }
+
+  .form-helper {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>
