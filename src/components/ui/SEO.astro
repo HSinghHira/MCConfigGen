@@ -10,12 +10,12 @@ interface Props {
 const {
   title,
   description,
-  image = '/og-image.png', // Fallback to a default OG image
+  image = '/og-image.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   type = 'website',
 } = Astro.props;
 
-const siteName = "MC ConfigGen";
+const siteName = "MC Config Gen";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -26,7 +26,7 @@ const structuredData = {
   "operatingSystem": "Web",
   "author": {
     "@type": "Organization",
-    "name": "MC ConfigGen"
+    "name": "MC Config Gen"
   },
   "offers": {
     "@type": "Offer",
