@@ -1,8 +1,8 @@
 ---
-import GeneratorLayout from '@/components/generators/GeneratorLayout.astro';
-import PlayerKitsGenerator from '@/components/generators/playerkits/PlayerKitsGenerator';
-import MainLayout from '@/components/ui/MainLayout.astro';
-import { DownloadButton } from '@/components/generators/playerkits/DownloadButton';
+import GeneratorLayout from "@/components/generators/GeneratorLayout.astro";
+import PlayerKitsGenerator from "@/components/generators/playerkits/PlayerKitsGenerator";
+import MainLayout from "@/components/ui/MainLayout.astro";
+import { DownloadButton } from "@/components/generators/playerkits/DownloadButton";
 
 // This page wraps the React component in our generator layout
 ---
@@ -11,7 +11,7 @@ import { DownloadButton } from '@/components/generators/playerkits/DownloadButto
   <GeneratorLayout
     title="PlayerKits 2 Configuration"
     pluginName="PlayerKits 2"
-    pluginVersion="2.6.0+"
+    pluginVersion="1.21.1+"
     description="Create advanced kits with permissions, cooldowns, and display items."
     docsUrl="https://ajneb97.gitbook.io/playerkits-2"
     spigotUrl="https://modrinth.com/plugin/playerkits-2"
@@ -24,12 +24,13 @@ import { DownloadButton } from '@/components/generators/playerkits/DownloadButto
     <div slot="configuration" class="w-full h-full">
       <PlayerKitsGenerator client:only="react" />
     </div>
-    
-    <div slot="preview" style="display: none;"></div> 
-    
+
+    <div slot="preview" style="display: none;"></div>
+
     <div slot="footer">
       <p class="text-gray-400 text-sm">
-        Generated configs are compatible with PlayerKits 2.x versions. Always backup your files before applying changes.
+        Generated configs are compatible with PlayerKits 2.x versions. Always
+        backup your files before applying changes.
       </p>
     </div>
   </GeneratorLayout>

@@ -4,35 +4,39 @@ interface Props {
   description: string;
   image?: string;
   canonicalURL?: string | URL;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
 }
 
 const {
   title,
   description,
-  image = '/og-image.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
-  type = 'website',
+  type = "website",
 } = Astro.props;
+
+// Determine OG image path
+const pathname = Astro.url.pathname.replace(/\/$/, "");
+const image =
+  Astro.props.image || (pathname === "" ? "/og.png" : `/og${pathname}.png`);
 
 const siteName = "MC Config Gen";
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": title,
-  "description": description,
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web",
-  "author": {
+  name: title,
+  description: description,
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Web",
+  author: {
     "@type": "Organization",
-    "name": "MC Config Gen"
+    name: "MC Config Gen",
   },
-  "offers": {
+  offers: {
     "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+    price: "0",
+    priceCurrency: "USD",
+  },
 };
 ---
 
