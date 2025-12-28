@@ -14,6 +14,11 @@ const pages = [
         title: 'PlayerKits 2.x Generator',
         description: 'Create complex survival kits, daily rewards, and starter gear for PlayerKits 2.x.',
     },
+    {
+        slug: 'generators/vanguardranks',
+        title: 'VanguardRanks Generator',
+        description: 'Design custom rank progression systems with icons, lore, and requirements.',
+    },
 ];
 
 export function getStaticPaths() {
