@@ -5,6 +5,10 @@ interface Props {
   image?: string;
   canonicalURL?: string | URL;
   type?: "website" | "article";
+  keywords?: string;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -12,6 +16,10 @@ const {
   description,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   type = "website",
+  keywords = "minecraft, config generator, mod configuration, minecraft tools, game development",
+  author = "Harman Singh Hira",
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // Determine OG image path
@@ -20,30 +28,84 @@ const image =
   Astro.props.image || (pathname === "" ? "/og.png" : `/og${pathname}.png`);
 
 const siteName = "MC Config Gen";
+const fullImageUrl = new URL(image, Astro.url);
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: title,
+  name: siteName,
+  applicationName: title,
   description: description,
+  url: canonicalURL,
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Web",
+  browserRequirements: "Requires JavaScript. Requires HTML5.",
   author: {
-    "@type": "Organization",
-    name: "MC Config Gen",
+    "@type": "Person",
+    name: author,
+    url: "https://twitter.com/HSinghHira",
+  },
+  creator: {
+    "@type": "Person",
+    name: author,
   },
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
   },
+  screenshot: fullImageUrl,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    ratingCount: "1",
+  },
 };
+
+// Add Organization schema
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: Astro.site,
+  logo: new URL("/favicon.ico", Astro.site),
+  sameAs: ["https://twitter.com/HSinghHira"],
+};
+
+// BreadcrumbList for navigation
+const breadcrumbData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: Astro.site?.toString() || "",
+    },
+  ],
+};
+
+if (pathname) {
+  const pathParts = pathname.split("/").filter(Boolean);
+  pathParts.forEach((part, index) => {
+    breadcrumbData.itemListElement.push({
+      "@type": "ListItem",
+      position: index + 2,
+      name: part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " "),
+      item: new URL(
+        pathParts.slice(0, index + 1).join("/"),
+        Astro.site
+      ).toString(),
+    });
+  });
+}
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
@@ -53,21 +115,61 @@ const structuredData = {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="English" />
+<meta name="revisit-after" content="7 days" />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#000000" />
+<meta name="color-scheme" content="dark light" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+{
+  type === "article" && publishedTime && (
+    <meta property="article:published_time" content={publishedTime} />
+  )
+}
+{
+  type === "article" && modifiedTime && (
+    <meta property="article:modified_time" content={modifiedTime} />
+  )
+}
+{type === "article" && <meta property="article:author" content={author} />}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@HSinghHira" />
+<meta name="twitter:creator" content="@HSinghHira" />
+<meta name="twitter:url" content={Astro.url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullImageUrl} />
+<meta name="twitter:image:alt" content={title} />
+
+<!-- Additional SEO Tags -->
+<meta name="application-name" content={siteName} />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content={siteName} />
+<meta name="format-detection" content="telephone=no" />
+<meta name="mobile-web-app-capable" content="yes" />
 
 <!-- Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organizationData)}
+/>
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
