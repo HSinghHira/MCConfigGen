@@ -1,0 +1,33 @@
+---
+import GeneratorLayout from "@/components/generators/GeneratorLayout.astro";
+import VanguardGenerator from "@/components/generators/vanguard/VanguardGenerator";
+import { DownloadButtons } from "@/components/generators/vanguard/DownloadButtons";
+import MainLayout from "@/components/ui/MainLayout.astro";
+
+// This page wraps the React component in our generator layout
+---
+
+<MainLayout title="Vanguard Rank System Builder - Minecraft Plugin Tools">
+  <GeneratorLayout
+    title="Vanguard Rank System"
+    pluginName="Vanguard"
+    pluginVersion="1.9.0"
+    description="Design custom rank progression systems with icons, lore, and requirements."
+    layout="full"
+  >
+    <div slot="actions">
+      <DownloadButtons client:load />
+    </div>
+
+    <div slot="configuration" class="w-full h-full">
+      <VanguardGenerator client:only="react" />
+    </div>
+  </GeneratorLayout>
+</MainLayout>
+
+<style>
+  /* Ensure React component takes full height */
+  :global(.vanguard-generator) {
+    min-height: 600px;
+  }
+</style>

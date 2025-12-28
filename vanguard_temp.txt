@@ -1,0 +1,200 @@
+# Minecraft Rank System Builder - Documentation
+
+## 1. Purpose
+
+This web application is a **visual configuration tool for creating Minecraft server rank systems**. It allows server administrators to:
+
+- Design custom rank progression systems with icons, lore, and requirements
+- Generate ready-to-use configuration files (ranks.yml and installranks.sk)
+- Configure LuckPerms permissions integration
+- Set up automated commands that execute when players obtain ranks
+- Export/import configurations for backup and sharing
+
+The tool outputs files compatible with popular Minecraft server plugins for rank management.
+
+---
+
+## 2. Features & Options
+
+### 2.1 Rank Management
+
+#### Basic Rank Properties
+
+- **Rank Name** (required): Internal identifier (no spaces allowed)
+- **Display Name**: User-facing name shown in menus/messages
+- **Icon Type**: Choose between:
+  - **Material**: Standard Minecraft items from a predefined list (60+ options)
+  - **Custom Head**: Player heads using `head:` prefix
+- **Icon Amount**: Stack size displayed (1-64)
+
+#### Available Materials
+
+The system includes 60+ Minecraft materials organized by category:
+
+- **Weapons**: Swords (wood → netherite), axes, bow, crossbow, trident
+- **Tools**: Pickaxes, fishing rod
+- **Armor**: Full sets (leather, iron, diamond, netherite)
+- **Resources**: Diamond, emerald, gold/iron/netherite ingots, coal, redstone
+- **Special Items**: Nether star, beacon, totem of undying, enchanted book, player head, experience bottle
+- **Blocks**: Stone, cobblestone, grass, dirt, chest, ender chest, obsidian
+
+### 2.2 Lore System
+
+- Add multiple lines of descriptive text to rank items
+- Supports Minecraft color codes and formatting
+- **RGB Color Picker**: Visual color selector with hex code output
+- **Fancy Text Formatter**: Apply text effects (bold, italic, underline, strikethrough, obfuscated)
+- Dynamic lore hints based on requirements (auto-generated status messages)
+
+### 2.3 Requirements System
+
+#### Quick Requirement Templates
+
+Pre-configured requirement types with appropriate placeholders:
+
+1. **Playtime**
+
+   - Placeholder: `%statistic_play_one_minute%`
+   - Type: NUMBER, Evaluation: GREATER
+   - GUI Message: Shows current vs required playtime (formatted)
+   - Deny Message: "You need more playtime to rank up"
+
+2. **Money (Economy)**
+
+   - Placeholder: `%vault_eco_balance%`
+   - Type: NUMBER, Evaluation: GREATER
+   - GUI Message: Shows money balance (formatted)
+   - Deny Message: "You need more money"
+
+3. **Kills**
+
+   - Placeholder: `%statistic_player_kills%`
+   - Type: NUMBER, Evaluation: GREATER
+   - GUI Message: Shows kill count
+   - Deny Message: "You need more kills"
+
+4. **Level**
+
+   - Placeholder: `%player_level%`
+   - Type: NUMBER, Evaluation: GREATER
+   - GUI Message: Shows player level
+   - Deny Message: "You need to be a higher level"
+
+5. **Blocks Mined**
+   - Placeholder: `%statistic_mine_block%`
+   - Type: NUMBER, Evaluation: GREATER
+   - GUI Message: Shows blocks mined (formatted)
+   - Deny Message: "You need to break more blocks"
+
+#### Custom Requirements
+
+Users can create custom requirements with:
+
+- Custom placeholders (PlaceholderAPI integration)
+- Evaluation types (NUMBER with GREATER comparison)
+- Custom GUI and deny messages
+
+### 2.4 Commands System
+
+#### Quick Command Templates
+
+Pre-built command templates for common actions:
+
+1. **LuckPerms Group Assignment**
+
+   - Template: `lp user %player% parent set {rankName}`
+   - Automatically sets player to the rank's permission group
+
+2. **Economy Reward**
+
+   - Template: `eco give %player% 1000`
+   - Grants money when rank is obtained
+
+3. **Title Display**
+
+   - Template: `title %player% title "{displayName}"`
+   - Shows title screen with rank name
+
+4. **Discord Announcement**
+
+   - Template: `discord: :medal: %player% has reached {displayName}!`
+   - Posts rank achievement to Discord
+
+5. **Kit Permission**
+
+   - Template: `lp user %player% permission set essentials.kits.{rankName} true`
+   - Grants access to rank-specific kit
+
+6. **Custom Command**
+   - Empty template for any custom command
+
+All commands support `%player%` placeholder and can reference rank properties.
+
+### 2.5 LuckPerms Integration
+
+- Add multiple permission nodes per rank
+- Permissions are automatically applied when ranks are obtained
+- Supports full LuckPerms permission syntax
+
+### 2.6 Rank Organization
+
+#### Rank List View
+
+- Visual list showing all ranks with:
+  - Order number (#1, #2, etc.)
+  - Display name
+  - Icon preview
+  - Requirement count badge
+  - Command count badge
+- Click any rank to edit
+- Current rank highlighted with accent border
+
+#### Reorder Modal
+
+- Drag-and-drop interface for rearranging rank order
+- Visual feedback during dragging
+- Save/Cancel options
+
+### 2.7 Status Dashboard
+
+Displays real-time statistics:
+
+- **Total Ranks**: Count of created ranks
+- **Total Requirements**: Sum of all requirements across ranks
+- **Total Commands**: Sum of all commands across ranks
+
+### 2.8 Export/Import System
+
+#### Export Options
+
+1. **Download ranks.yml**: Generates YAML configuration file
+2. **Download installranks.sk**: Generates Skript file for server installation
+3. **Export Configuration**: Exports complete project as JSON for backup
+
+#### Import
+
+- Import previously exported JSON configurations
+- Validation and error checking
+- Modal confirmation dialog
+
+### 2.9 Validation
+
+- **YAML Validation**: Check configuration before export
+- **Rank Name Validation**: Real-time checking for spaces (not allowed)
+- Error messages with specific issues
+
+---
+
+## 3. How Settings Work
+
+### 3.1 Rank Creation Workflow
+
+1. Click "New Rank" button
+2. Enter rank name (no spaces)
+3. Set display name, icon, and amount
+4. Switch between tabs to configure:
+   - **Basic**: Core rank properties
+   - **Lore**: Item description
+   - **Requirements**: Unlock conditions
+   - **Commands**: Actions on rank-up
+   - **LuckPerms**: Permission nodes

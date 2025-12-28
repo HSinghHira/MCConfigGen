@@ -26,3 +26,5 @@ pnpm-debug.log*
 implemtationplan.md
 package-lock.json
 .backup
+.me
+/.me
