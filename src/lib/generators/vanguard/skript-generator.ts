@@ -2,7 +2,7 @@ import type { VanguardConfig } from './types';
 
 export class VanguardSkriptGenerator {
     static generate(config: VanguardConfig): string {
-        let skript = "# Vanguard Rank System - Installation Script\n";
+        let skript = "# VanguardRank - https://mc-config-gen.hira.im/\n";
         skript += "# Generated on: " + new Date().toLocaleString() + "\n\n";
 
         skript += "command /installranks:\n";
